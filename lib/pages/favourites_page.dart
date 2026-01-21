@@ -11,7 +11,7 @@ class FavouritesPage extends StatefulWidget {
 }
 
 class _FavouritesPageState extends State<FavouritesPage> {
-  FavouritesDB _favouritesDB = FavouritesDB.instance;
+  final FavouritesDB _favouritesDB = FavouritesDB.instance;
   List favouritesList = [];
 
   @override
@@ -23,6 +23,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
 
   getAllFavourites() async {
     favouritesList = await _favouritesDB.getFavourites();
+    setState(() {});
   }
 
   @override
@@ -50,9 +51,6 @@ class _FavouritesPageState extends State<FavouritesPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    print(
-                      "name: ${favouritesList[index]['name']}, desc: ${favouritesList[index]['description']}, release_date: ${favouritesList[index]['release_date']}, rating: ${favouritesList[index]['rating']}, imageUrl: ${favouritesList[index]['image']}, voteCount: ${favouritesList[index]['vote_count']}, id: ${favouritesList[index]['id']}",
-                    );
                     return MovieInfoPage(
                       name: favouritesList[index]['name'],
                       description: favouritesList[index]['description'],
