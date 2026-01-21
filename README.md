@@ -9,6 +9,8 @@ To do that, create a file named api_keys.dart in the lib directory and include t
 2. apiKey
 3. readAccessToken
 
+Also, as TMDB APIs are blocked by some ISPs, it is recommended to use a VPN or use a private DNS like dns.google (8.8.8.8).
+
 ## External Libraries Used
 
 1. [http](https://pub.dev/packages/http)
