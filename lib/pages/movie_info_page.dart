@@ -63,7 +63,7 @@ class _MovieInfoPageState extends State<MovieInfoPage> {
           children: [
             Image.network(
               widget.imageUrl,
-              // height: 210,
+
               width: double.infinity,
               fit: BoxFit.cover,
             ),
@@ -97,6 +97,19 @@ class _MovieInfoPageState extends State<MovieInfoPage> {
                           setState(() {
                             isFavourite = !isFavourite;
                           });
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                isFavourite
+                                    ? 'Added to Favourites'
+                                    : 'Removed from Favourites',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              duration: const Duration(seconds: 1),
+                            ),
+                          );
                         },
                         icon: Icon(
                           Icons.favorite,
