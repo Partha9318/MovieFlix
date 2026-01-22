@@ -14,17 +14,21 @@ class HomePageProvider extends ChangeNotifier {
 
   void fetchAllData() async {
     try {
-      final results = await Future.wait([
-        fetchTrendingMoviesToday("1"),
-        fetchTrendingMoviesThisWeek("1"),
-        fetchTrendingTvToday("1"),
-        fetchTrendingTvThisWeek("1"),
-      ]);
+      // final results = await Future.wait([
+      //   fetchTrendingMoviesToday("1"),
+      //   fetchTrendingMoviesThisWeek("1"),
+      //   fetchTrendingTvToday("1"),
+      //   fetchTrendingTvThisWeek("1"),
+      // ]);
+      final moviesToday = await fetchTrendingMoviesToday("1");
+      final moviesWeek = await fetchTrendingMoviesThisWeek("1");
+      final tvToday = await fetchTrendingTvToday("1");
+      final tvWeek = await fetchTrendingTvThisWeek("1");
 
-      trendingMoviesToday = results[0]['results'];
-      trendingMoviesThisWeek = results[1]['results'];
-      trendingTvToday = results[2]['results'];
-      trendingTvThisWeek = results[3]['results'];
+      trendingMoviesToday = moviesToday['results'];
+      trendingMoviesThisWeek = moviesWeek['results'];
+      trendingTvToday = tvToday['results'];
+      trendingTvThisWeek = tvWeek['results'];
       isLoading = false;
 
       notifyListeners();

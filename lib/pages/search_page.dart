@@ -11,7 +11,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final FocusScopeNode _focusNode = FocusScopeNode();
+  final FocusNode _focusNode = FocusNode();
   final ScrollController _searchPageScrollController = ScrollController();
   final TextEditingController _searchController = TextEditingController();
   int currentPage = 1;
@@ -92,12 +92,14 @@ class _SearchPageState extends State<SearchPage> {
                     searchResults = results['results'];
                     totalPages = results['total_pages'];
                   });
+                  currentPage = 1;
                 },
               ),
             ),
-            SizedBox(
-              height: 600,
+            Expanded(
               child: GridView.builder(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 shrinkWrap: true,
                 controller: _searchPageScrollController,
                 scrollDirection: Axis.vertical,
@@ -115,7 +117,7 @@ class _SearchPageState extends State<SearchPage> {
                     return MovieTile(movie: movie);
                   } else {
                     if (_searchController.text.isEmpty) {
-                      return null;
+                      return SizedBox.shrink();
                     } else {
                       return Padding(
                         padding: EdgeInsets.symmetric(horizontal: 32),
